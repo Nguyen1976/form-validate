@@ -53,7 +53,10 @@
         rules: [
           Validator.isRequired('#fullname'),//Kiểm tra người dùng đã nhập chưa
           Validator.isEmail('#email'),//Kiểm tra xem có phải là email hay không
-          Validator.isRequired('#password', 6),
+          Validator.minLenght('#password', 6),
+          Validator.isConfirmed('#password_confirmation', function() {
+            return document.querySelector('#form-1 #password').value;
+          }),
         ]
       });
     </script>

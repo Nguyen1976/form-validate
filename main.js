@@ -73,3 +73,11 @@ Validator.minLenght = function(selector, min) {
     };
 }
 
+Validator.isConfirmed = function(selector, getCofirmValue) {
+    return {
+        selector: selector,
+        test: function(value) {//Để ktra xem có phải nhập giống nhau với input khác
+            return value === getCofirmValue() ? undefined : 'Giá trị nhập vào không chính xác';
+        }
+    }
+}
