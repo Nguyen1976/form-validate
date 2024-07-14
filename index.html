@@ -32,12 +32,46 @@
             <input id="password" name="password" type="password" placeholder="Nhập mật khẩu" class="form-control">
             <span class="form-message"></span>
           </div>
-      
+          
           <div class="form-group">
             <label for="password_confirmation" class="form-label">Nhập lại mật khẩu</label>
             <input id="password_confirmation" name="password_confirmation" placeholder="Nhập lại mật khẩu" type="password" class="form-control">
             <span class="form-message"></span>
           </div>
+          
+          <div class="form-group">
+            <label for="avatar" class="form-label">Ảnh đại diện</label>
+            <input id="avatar" name="avatar" type="file" class="form-control">
+            <span class="form-message"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="province" class="form-label">Tỉnh/TP</label>
+              <select name="province" id="province" class="form-control">
+                <option value="">--Chọn tỉnh/TP</option>
+                <option value="hni">Hà Nội</option>
+                <option value="hpg">Hải phòng</option>
+              </select>
+            <span class="form-message"></span>
+          </div>
+
+          <div class="form-group">
+            <label for="password_confirmation" class="form-label">Giới tính</label>
+            <div>
+              <input name="gender" type="radio" value="male" class="form-control">
+              Nam
+            </div>
+            <div>
+              <input name="gender" type="radio" value="famale" class="form-control">
+              Nữ
+            </div>
+            <div>
+              <input name="gender" type="radio" value="orther" class="form-control">
+              Khác
+            </div>
+            <span class="form-message"></span>
+          </div>
+          
       
           <button class="form-submit">Đăng ký</button>
         </form>
@@ -49,15 +83,24 @@
       //Mong muốn của chúng ta
       Validator({
         form: '#form-1',
+        formGroupSelector: '.form-group',
         errorSelector: '.form-message',
         rules: [
           Validator.isRequired('#fullname'),//Kiểm tra người dùng đã nhập chưa
+          // Validator.isRequired('#avatar'),//Kiểm tra người dùng đã nhập chưa
+          Validator.isRequired('input[name="gender"]'),//Kiểm tra người dùng đã nhập chưa
+          Validator.isRequired('#province'),//Kiểm tra người dùng đã nhập chưa
           Validator.isEmail('#email'),//Kiểm tra xem có phải là email hay không
           Validator.minLenght('#password', 6),
           Validator.isConfirmed('#password_confirmation', function() {
             return document.querySelector('#form-1 #password').value;
-          }),
-        ]
+          }, 'Mật khẩu nhập lại không chính xác'),
+          Validator.isRequired('#password_confirmation')
+        ],
+        onSubmit: function(data) {
+          //callAPI
+          console.log(data);
+        },
       });
     </script>
 </body> 
